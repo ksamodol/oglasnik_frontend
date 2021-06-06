@@ -1,0 +1,17 @@
+<mat-card style="margin:2em;">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{listing.title}}</mat-card-title>
+        <mat-card-subtitle><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{listing.placeName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{listing.description}}
+            {{listing.condition}}
+            {{listing.price}}
+            {{listing.timestampCreated}}
+            {{listing.category}}
+            {{listing.userUsername}}
+        </p>
+    </mat-card-content>
+</mat-card>

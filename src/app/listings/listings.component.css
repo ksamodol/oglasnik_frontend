@@ -1,0 +1,28 @@
+mat-grid-tile {
+    background: lightblue;
+  }
+.example-sidenav{
+  position: fixed;
+}
+mat-form-field{
+  width: 100%;
+}
+
+.menu{
+  display: block;
+  position: relative;
+  width: max-content;
+  z-index: 100;
+  padding: 10px;
+  transition: all 0.3s linear;
+}
+form{
+  width: 600px; 
+  height:700px; 
+  padding: 10px;
+
+}
+.searchButton{
+  margin-left: auto;
+  display: block;
+}

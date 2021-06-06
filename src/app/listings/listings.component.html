@@ -1,0 +1,50 @@
+<mat-sidenav-container class="example-container" autosize>
+	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" disableClose>
+        <fa-icon [icon]="faBars" class="menu" (click)="sidenavToggle();" size="3x" matRipple></fa-icon>
+        <div [hidden]=!isExpanded>
+            <form>
+                <mat-form-field appearance="fill">
+                    <mat-label>County</mat-label>
+                    <mat-select (selectionChange)="onCountyChange($event.value)">
+                        <mat-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Place</mat-label>
+                    <mat-select [disabled]="placeSelectDisabled">
+                        <mat-option *ngFor="let place of places" value="place.id">{{place.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let category of categories" value="category">{{category}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Condition</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let condition of conditions" value="condition">{{condition}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Min price</mat-label>
+                    <input matInput type="number" placeholder="0">
+                    <span matPrefix></span>
+                    <span matSuffix>kn</span>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Max price</mat-label>
+                    <input matInput type="number" placeholder="0">
+                    <span matSuffix>kn</span>
+                </mat-form-field>
+        
+                <button mat-raised-button color="primary" (click)="sidenavToggle();" class="searchButton">Search</button>
+            </form>
+        </div>
+	</mat-sidenav>
+	<div>
+        <app-listing-card *ngFor="let listing of listings" [listing]="listing"></app-listing-card>
+    </div>
+</mat-sidenav-container>
