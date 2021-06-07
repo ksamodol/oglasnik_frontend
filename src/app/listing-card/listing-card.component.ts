@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Listing } from '../entity/listing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listing-card',
@@ -11,9 +12,13 @@ export class ListingCardComponent implements OnInit {
 
   @Input() listing: Listing;
   faMapMarkerAlt = faMapMarkerAlt;
-  constructor() { }
+  faUser = faUser;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  onListingClick(id: number){
+    this.router.navigate(['listing', id]);
+  }
 }

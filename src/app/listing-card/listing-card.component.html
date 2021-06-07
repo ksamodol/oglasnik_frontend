@@ -1,6 +1,10 @@
-<mat-card style="margin:2em;">
+<!--
+<mat-card style="margin:2em;" matRipple>
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar class="userCard">
+            <fa-icon [icon]="faUser" size="2x"></fa-icon>
+            <p>{{listing.userUsername}}</p>
+        </div>
         <mat-card-title>{{listing.title}}</mat-card-title>
         <mat-card-subtitle><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{listing.placeName}}</mat-card-subtitle>
     </mat-card-header>
@@ -9,9 +13,40 @@
             {{listing.description}}
             {{listing.condition}}
             {{listing.price}}
-            {{listing.timestampCreated}}
+            {{listing.timestampCreated | date:'dd/MM/yy'}} 
             {{listing.category}}
-            {{listing.userUsername}}
         </p>
     </mat-card-content>
+    <img mat-card-image src="assets/nevera.jpg">
+    <mat-card-footer style="text-align: right;">Date published: {{listing.timestampCreated | date:'dd/MM/yy'}}</mat-card-footer>
 </mat-card>
+-->
+<div class="listingCard" matRipple (click)="onListingClick(listing.id)">
+    <div class="listingHeader">
+        <div class="userInfo">
+            <img src="assets/user-small.png">
+            <br>
+            <span>{{listing.userUsername}}</span>
+        </div>
+        <div class="title">
+            <span>{{listing.title}}</span>
+        </div>
+        <div class="location">
+            <fa-icon [icon]="faMapMarkerAlt"></fa-icon>{{listing.placeName}}
+        </div>
+        
+    </div>
+    <div class="listingContent">
+        <ul>
+            <li>Category: {{listing.category}}</li>
+            <li>Condition: {{listing.condition}}</li>
+            <li>Published: {{listing.timestampCreated | date:'dd/MM/yy'}} </li>
+        </ul>
+        <p>
+            {{listing.description}}
+        </p>
+    </div>
+    <div class="listingFooter">
+        {{(listing.price/100)| number: '1.2-2'}}kn
+    </div>
+</div>
