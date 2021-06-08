@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import { ListingDetailsComponent } from './listing-details/listing-details.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListingsComponent } from './listings/listings.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -20,6 +20,11 @@ import { ListingCardComponent } from './listing-card/listing-card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRippleModule} from '@angular/material/core';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { JwtModule } from "@auth0/angular-jwt";
+import { LoginComponent } from './login/login.component';
+import { HttpAuthInterceptorService } from './services/http-auth-interceptor.service';
 
 
 @NgModule({
@@ -28,7 +33,9 @@ import {MatRippleModule} from '@angular/material/core';
     TestComponent,
     ListingDetailsComponent,
     ListingsComponent,
-    ListingCardComponent
+    ListingCardComponent,
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +53,21 @@ import {MatRippleModule} from '@angular/material/core';
     MatCardModule,
     FontAwesomeModule,
     MatSidenavModule,
-    MatRippleModule
+    MatRippleModule,
+    MDBBootstrapModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem("jwt_token");
+        },
+        allowedDomains: ["http://localhost:8080"],
+        disallowedRoutes: [],
+      },
+    })
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

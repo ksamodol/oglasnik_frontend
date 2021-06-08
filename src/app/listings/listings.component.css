@@ -1,8 +1,12 @@
 mat-grid-tile {
     background: lightblue;
-  }
+}
+.example-container{
+  top: 46px;
+}
 .example-sidenav{
   position: fixed;
+  top: 46px;
 }
 mat-form-field{
   width: 100%;
