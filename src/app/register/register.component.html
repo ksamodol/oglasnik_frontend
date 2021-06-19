@@ -1,0 +1,54 @@
+<br><br><br><br>
+<button (click)="registerModal.show()">register</button>
+
+<div mdbModal #registerModal="mdbModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" (click)="registerModal.hide()">
+            <span>×</span>
+          </button>
+          <h4 class="modal-title w-100" id="registerModalLabel ">Register</h4>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "registerForm" class="md-form" (ngSubmit)="submitForm()"> 
+
+                <p class="h4 mb-4 text-center">Register</p>
+                <div class="md-form form-group">
+                    <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                    <input mdbInput type="text" id="username" formControlName="username" placeholder="Username" class="form-control mb-4">
+                    <mdb-error *ngIf="username.invalid && username.touched">Username must be between 3 and 20 characters!</mdb-error>
+                </div>
+                <div class="md-form form-group">
+                    <mdb-icon fas icon="unlock-alt" class="prefix"></mdb-icon>
+                    <input mdbInput type="password" id="password" formControlName="password" placeholder="Password" class="form-control mb-4">
+                    <mdb-error *ngIf="password.invalid && password.touched">Password must must be of length between 8 and 128, and contain mixed case characters and a number</mdb-error>
+                </div>
+                <div class="md-form form-group ">
+                    <mdb-icon fas icon="at" class="prefix"></mdb-icon>
+                    <input mdbInput type="email" id="email" formControlName="email" placeholder="E-mail" class="form-control mb-4">
+                    <mdb-error *ngIf="email.invalid && email.touched">Must be a valid email</mdb-error>
+                </div>
+                <div class="form-row">
+                    <div class="md-form form-group col-md-6 mt-0">
+                        <mdb-icon fas icon="id-badge" class="prefix"></mdb-icon>
+                        <input mdbInput type="text" id="firstName" formControlName="firstName" placeholder="First name" class="form-control mb-4">
+                        <mdb-error *ngIf="firstName.invalid && firstName.touched">First name must be between 2 and 32 characters long.</mdb-error>
+                    </div>
+                    <div class="md-form form-group col-md-6 mt-0">
+                        <input mdbInput type="text" id="lastName" formControlName="lastName" placeholder="Last name" class="form-control mb-4">
+                        <mdb-error *ngIf="lastName.invalid && lastName.touched">Last name must be between 2 and 32 characters long.</mdb-error>
+                    </div>
+                </div>
+                
+
+                <button mdbBtn color="primary" block="true" class="my-4" type="submit" [disabled]="registerForm.invalid">Register</button>
+
+                <p class="text-center">Already a member?
+                    <a (click)="registerModal.hide()" href>Login</a>
+                </p>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -25,6 +25,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { JwtModule } from "@auth0/angular-jwt";
 import { LoginComponent } from './login/login.component';
 import { HttpAuthInterceptorService } from './services/http-auth-interceptor.service';
+import { RegisterComponent } from './register/register.component';
+import { AddListingComponent } from './add-listing/add-listing.component';
+
+
 
 
 @NgModule({
@@ -35,7 +39,9 @@ import { HttpAuthInterceptorService } from './services/http-auth-interceptor.ser
     ListingsComponent,
     ListingCardComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    AddListingComponent
   ],
   imports: [
     BrowserModule,

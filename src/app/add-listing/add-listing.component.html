@@ -1,0 +1,196 @@
+<!-- <form [formGroup]="addListingForm" class="md-form w-50 mx-auto" (ngSubmit)="submitForm()"> 
+
+    <p class="h4 mb-4 text-center">Add new listing</p>
+    <div class="md-form form-group">
+        <input mdbInput type="text" id="title" formControlName="title" placeholder="Title" class="form-control mb-4">
+        <mdb-error *ngIf="title.invalid && title.touched">Title must be between 3 and 20 characters!</mdb-error>
+    </div>
+    <div class="md-form form-group">
+        <input mdbInput type="text" id="description" formControlName="description" placeholder="Description" class="form-control mb-4">
+        <mdb-error *ngIf="description.invalid && description.touched">description error</mdb-error>
+    </div>
+    <div class="md-form form-group">
+        <input mdbInput type="number" id="price" formControlName="price" placeholder="Price" class="form-control mb-4">
+        <mdb-error *ngIf="price.invalid && price.touched">Title must be between 3 and 20 characters!</mdb-error>
+    </div>
+    <div class="md-form form-group">
+        <select class="browser-default custom-select mb-4" formControlName="conditionSelect">
+            <option *ngFor="let condition of conditions" [value]="condition">{{condition}}</option>
+        </select>
+    </div>
+    <div class="md-form form-group">
+        <select class="browser-default custom-select mb-4" formControlName="countySelect" (change)="onCountyChange($event.target.value)">
+            <option *ngFor="let county of counties" [value]="county.id">{{county.name}}</option>
+        </select>
+    </div>
+    <div class="md-form form-group">
+        <select class="browser-default custom-select mb-4" formControlName="placeSelect">
+            <option *ngFor="let place of places" [value]="place.id">{{place.name}}</option>
+        </select>
+    </div>
+    <div class="md-form form-group">
+        <select class="browser-default custom-select mb-4" formControlName="categorySelect">
+            <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+        </select>
+    </div>
+    <div *ngIf="categorySelect.value=='Vehicle'">
+        <div class="md-form form-group">
+            <input mdbInput type="number" id="vehicleYear" formControlName="vehicleYear" placeholder="Vehicle Year" class="form-control mb-4">
+            <mdb-error *ngIf="vehicleYear.invalid && vehicleYear.invalid">Title must be between 3 and 20 characters!</mdb-error>
+        </div>
+        <div class="md-form form-group">
+            <input mdbInput type="text" id="vehicleMake" formControlName="vehicleMake" placeholder="Vehicle Make" class="form-control mb-4">
+            <mdb-error *ngIf="vehicleMake.invalid && vehicleMake.touched">Title must be between 3 and 20 characters!</mdb-error>
+        </div>
+        <div class="md-form form-group">
+            <input mdbInput type="text" id="vehicleModel" formControlName="vehicleModel" placeholder="Vehicle Model" class="form-control mb-4">
+            <mdb-error *ngIf="vehicleModel.invalid && vehicleModel.touched">Title must be between 3 and 20 characters!</mdb-error>
+        </div>
+        <div class="md-form form-group">
+            <input mdbInput type="number" id="vehicleMileage" formControlName="vehicleMileage" placeholder="Vehicle mileage" class="form-control mb-4">
+            <mdb-error *ngIf="vehicleMileage.invalid && vehicleMileage.touched">Title must be between 3 and 20 characters!</mdb-error>
+        </div>
+        <div class="md-form form-group">
+            <input mdbInput type="number" id="vehicleHorsepower" formControlName="vehicleHorsepower" placeholder="vehicleHorsepower" class="form-control mb-4">
+            <mdb-error *ngIf="vehicleHorsepower.invalid && vehicleHorsepower.touched">Title must be between 3 and 20 characters!</mdb-error>
+        </div>
+    </div>
+    
+    <button mdbBtn color="primary" block="true" class="my-4" type="submit" [disabled]="addListingForm.invalid">Publish!</button>
+
+</form> -->
+
+
+
+
+
+<form [formGroup]="addListingForm" (ngSubmit)="submitForm()" style="width:800px" class="container">
+
+    <p class="h4 mb-4 text-center">Add new listing</p>
+
+    <div class="row">
+        <mat-form-field class="col-9">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" id="title" formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="col-3">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" id="price" formControlName="price" placeholder="0">
+            <span matSuffix>kn</span>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="col-12">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description" formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="6" placeholder="Write a short description"></textarea>
+        </mat-form-field>
+    </div>
+    
+
+    <div class="row mt-4" class="border">
+        <p class="m-2">Listing location:</p>
+        <mat-form-field class="col-6">
+            <mat-label>County</mat-label>
+            <mat-select formControlName="countySelect" (selectionChange)="onCountyChange($event.value)">
+                <mat-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-6">
+            <mat-label>Place</mat-label>
+            <mat-select formControlName="placeSelect">
+                <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+    <div class="row mt-4">
+        <mat-form-field class="col-6">
+            <mat-label>Condition</mat-label>
+            <mat-select formControlName="conditionSelect">
+                <mat-option *ngFor="let condition of conditions" [value]="condition">{{condition}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="categorySelect">
+                <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    
+
+    <div *ngIf="categorySelect.value=='Vehicle'" class="my-4 border p-3">
+        <p>Vehicle information</p>
+        <div class="row">
+            <mat-form-field class="col-6">
+                <mat-label>Vehicle Make</mat-label>
+                <input matInput type="text" id="vehicleMake" formControlName="vehicleMake">
+            </mat-form-field>
+
+            <mat-form-field class="col-6">
+                <mat-label>Vehicle Model</mat-label>
+                <input matInput type="text" id="vehicleModel" formControlName="vehicleModel">
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col-4">
+                <mat-label>Vehicle Year</mat-label>
+                <input matInput type="number" id="vehicleYear" formControlName="vehicleYear">
+            </mat-form-field>
+    
+            <mat-form-field class="col-4">
+                <mat-label>Vehicle Mileage</mat-label>
+                <input matInput type="number" id="vehicleMileage" formControlName="vehicleMileage">
+                <span matSuffix>mi</span>
+            </mat-form-field>
+    
+            <mat-form-field class="col-4">
+                <mat-label>Vehicle Horsepower</mat-label>
+                <input matInput type="number" id="vehicleHorsepower" formControlName="vehicleHorsepower">
+                <span matSuffix>hp</span>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="categorySelect.value=='Property'" class="my-4 border p-3">
+        <p>Property information</p>
+        <div class="row">
+            <mat-form-field  class="col-6">
+                <mat-label>Outside area</mat-label>
+                <input matInput type="number" id="propertyOutsideArea" formControlName="propertyOutsideArea">
+                <span matSuffix>m<sup>2</sup></span>
+            </mat-form-field>
+
+            <mat-form-field class="col-6">
+                <mat-label>Inside area</mat-label>
+                <input matInput type="number" id="propertyInsideArea" formControlName="propertyInsideArea">
+                <span matSuffix>m<sup>2</sup></span>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field class="col-4">
+                <mat-label>Number of floors</mat-label>
+                <input matInput type="number" id="propertyFloors" formControlName="propertyFloors">
+            </mat-form-field>
+    
+            <mat-form-field class="col-4">
+                <mat-label>Number of rooms</mat-label>
+                <input matInput type="number" id="propertyRooms" formControlName="propertyRooms">
+            </mat-form-field>
+    
+            <mat-form-field class="col-4">
+                <mat-label>Year built</mat-label>
+                <input matInput type="number" id="propertyYear" formControlName="propertyYear">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-end">
+        <button mat-raised-button color="primary" [disabled]="addListingForm.invalid" class="col-3">Publish!</button>
+    </div>
+    
+</form>

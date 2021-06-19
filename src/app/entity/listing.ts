@@ -6,6 +6,7 @@ export interface Listing {
     price: number;
     timestampCreated: Date;
     category: string;
+    countyName: string;
     placeName: string;
     userUsername: string;
 }
