@@ -1,0 +1,20 @@
+<div class="container mt-4">
+    <table class="table table-hover">
+        <thead>
+            <th scope="col" colspan="3" class="text-center border-top-0">My listings</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let listing of listings; index as i">
+                <th scope="row" style="width:80%">
+                    {{listing.title}}
+                </th>
+                <td>
+                    <a (click)="deleteListing(listing.id, i)"><mdb-icon fas icon="trash-alt"></mdb-icon></a>
+                </td>
+                <td>
+                    <a routerLink="/listing/{{listing.id}}"><mdb-icon matTooltip="Info about the action" fas icon="eye"></mdb-icon></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

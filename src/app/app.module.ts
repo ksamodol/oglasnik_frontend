@@ -27,9 +27,10 @@ import { LoginComponent } from './login/login.component';
 import { HttpAuthInterceptorService } from './services/http-auth-interceptor.service';
 import { RegisterComponent } from './register/register.component';
 import { AddListingComponent } from './add-listing/add-listing.component';
-
-
-
+import { MyListingsComponent } from './my-listings/my-listings.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { FrontPageComponent } from './front-page/front-page.component';
+import { NgxImageGalleryModule } from 'ngx-image-gallery';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,10 @@ import { AddListingComponent } from './add-listing/add-listing.component';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    AddListingComponent
+    AddListingComponent,
+    MyListingsComponent,
+    NotFoundComponent,
+    FrontPageComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,7 @@ import { AddListingComponent } from './add-listing/add-listing.component';
     FontAwesomeModule,
     MatSidenavModule,
     MatRippleModule,
+    NgxImageGalleryModule,
     MDBBootstrapModule.forRoot(),
     JwtModule.forRoot({
       config: {

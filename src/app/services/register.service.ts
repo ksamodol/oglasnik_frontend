@@ -13,8 +13,8 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(username: string, password:string, email:string, firstName: string, lastName: string){
-    return this.http.post<any>(API_URL + "/register", {username, password, email, firstName, lastName});
+  register(username: string, password:string, email:string, phoneNumber:string,  firstName: string, lastName: string){
+    return this.http.post<any>(API_URL + "/register", {username, password, email, phoneNumber, firstName, lastName});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

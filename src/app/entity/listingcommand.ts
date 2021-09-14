@@ -1,17 +1,11 @@
-export interface Listing {
-    id: number;
+export interface ListingCommand{
     title: string;
     description: string;
     condition: string;
     price: number;
-    timestampCreated: Date;
     category: string;
-    countyName: string;
-    placeName: string;
-    userUsername: string;
-    userPhoneNumber: string;
-    images: string[];
-
+    placeId: number;
+    
     make: string;
     model: string;
     year: number;
@@ -20,7 +14,7 @@ export interface Listing {
 
     insideArea: number;
     outsideArea: number;
-    floors: number;
     yearBuilt: number;
+    floors: number;
     numberOfRooms: number;
 }

@@ -1,45 +1,179 @@
-<mat-sidenav-container class="example-container" autosize>
-	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" disableClose>
+<mat-sidenav-container autosize>
+	<mat-sidenav #sidenav class="sidenav" mode="side" opened="true" disableClose>
         <fa-icon [icon]="faBars" class="menu" (click)="sidenavToggle();" size="3x" matRipple></fa-icon>
         <div [hidden]=!isExpanded>
-            <form>
-                <mat-form-field appearance="fill">
-                    <mat-label>County</mat-label>
-                    <mat-select (selectionChange)="onCountyChange($event.value)">
-                        <mat-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Place</mat-label>
-                    <mat-select [disabled]="placeSelectDisabled">
-                        <mat-option *ngFor="let place of places" value="place.id">{{place.name}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Category</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let category of categories" value="category">{{category}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Condition</mat-label>
-                    <mat-select>
-                        <mat-option *ngFor="let condition of conditions" value="condition">{{condition}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+
+            <form [formGroup]="filterForm" class="container">
+                <div class="row">
+                    <mat-form-field class="col-12">
+                        <mat-label>Search</mat-label>
+                        <input matInput type="text" formControlName="search">
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="fill" class="col-6">
+                        <mat-label>County</mat-label>
+                        <mat-select (selectionChange)="onCountyChange($event.value)" formControlName="county">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="col-6">
+                        <mat-label>Place</mat-label>
+                        <mat-select formControlName="place">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="fill" class="col-12">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="fill" class="col-12">
+                        <mat-label>Condition</mat-label>
+                        <mat-select formControlName="condition">
+                            <mat-option>None</mat-option>
+                            <mat-option *ngFor="let condition of conditions" [value]="condition">{{condition}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="row">
+                    <mat-form-field appearance="fill" class="col-6">
+                        <mat-label>Min price</mat-label>
+                        <input matInput type="number" placeholder="0" formControlName="priceMin">
+                        <span matSuffix>kn</span>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" class="col-6">
+                        <mat-label>Max price</mat-label>
+                        <input matInput type="number" placeholder="0" formControlName="priceMax">
+                        <span matSuffix>kn</span>
+                    </mat-form-field>
+                </div>
+
+                <div *ngIf="category.value=='Vehicle'" class="my-4 border p-3">
+                    <p>Vehicle information</p>
+                    <div class="row">
+                        <mat-form-field class="col-12">
+                            <mat-label>Vehicle Make</mat-label>
+                            <input matInput type="text" formControlName="make">
+                        </mat-form-field>
+            
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-12">
+                            <mat-label>Vehicle Model</mat-label>
+                            <input matInput type="text" formControlName="model">
+                        </mat-form-field>
+                    </div>
+            
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min vehicle year</mat-label>
+                            <input matInput type="number" formControlName="yearMin">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6">
+                            <mat-label>Max vehicle year</mat-label>
+                            <input matInput type="number"formControlName="yearMax">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min vehicle mileage</mat-label>
+                            <input matInput type="number" formControlName="mileageMin">
+                            <span matSuffix>mi</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6">
+                            <mat-label>Max vehicle mileage</mat-label>
+                            <input matInput type="number" formControlName="mileageMax">
+                            <span matSuffix>mi</span>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min vehicle horsepower</mat-label>
+                            <input matInput type="number" formControlName="horsepowerMin">
+                            <span matSuffix>hp</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6">
+                            <mat-label>Max vehicle horsepower</mat-label>
+                            <input matInput type="number" formControlName="horsepowerMax">
+                            <span matSuffix>hp</span>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div *ngIf="category.value=='Property'" class="my-4 border p-3">
+                    <p>Property information</p>
+                    <div class="row">
+                        <mat-form-field  class="col-6">
+                            <mat-label>Min outside area</mat-label>
+                            <input matInput type="number" formControlName="outsideAreaMin">
+                            <span matSuffix>m<sup>2</sup></span>
+                        </mat-form-field>
+                        <mat-form-field  class="col-6">
+                            <mat-label>Max outside area</mat-label>
+                            <input matInput type="number" formControlName="outsideAreaMax">
+                            <span matSuffix>m<sup>2</sup></span>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min inside area</mat-label>
+                            <input matInput type="number" formControlName="insideAreaMin">
+                            <span matSuffix>m<sup>2</sup></span>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6">
+                            <mat-label>Max inside area</mat-label>
+                            <input matInput type="number" formControlName="insideAreaMax">
+                            <span matSuffix>m<sup>2</sup></span>
+                        </mat-form-field>
+                    </div>
+            
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Max number of floors</mat-label>
+                            <input matInput type="number" formControlName="floorsMin">
+                        </mat-form-field>
+                        <mat-form-field class="col-6">
+                            <mat-label>Min number of floors</mat-label>
+                            <input matInput type="number" formControlName="floorsMax">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min number of rooms</mat-label>
+                            <input matInput type="number" formControlName="roomsMin">
+                        </mat-form-field>
+                        <mat-form-field class="col-6">
+                            <mat-label>Max number of rooms</mat-label>
+                            <input matInput type="number" formControlName="roomsMax">
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="col-6">
+                            <mat-label>Min year built</mat-label>
+                            <input matInput type="number" formControlName="yearBuiltMin">
+                        </mat-form-field>
+                        <mat-form-field class="col-6">
+                            <mat-label>Max year built</mat-label>
+                            <input matInput type="number" formControlName="yearBuiltMax">
+                        </mat-form-field>
+                    </div>
+                </div>
         
-                <mat-form-field appearance="fill">
-                    <mat-label>Min price</mat-label>
-                    <input matInput type="number" placeholder="0">
-                    <span matSuffix>kn</span>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Max price</mat-label>
-                    <input matInput type="number" placeholder="0">
-                    <span matSuffix>kn</span>
-                </mat-form-field>
-        
-                <button mat-raised-button color="primary" (click)="sidenavToggle();" class="searchButton">Search</button>
+                <button mat-raised-button color="primary" (click)="onSearch();" class="searchButton">Search</button>
             </form>
         </div>
 	</mat-sidenav>

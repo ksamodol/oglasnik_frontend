@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { LoginComponent } from '../login/login.component';
+import { AuthenticationService } from '../services/authentication.service';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
 export class NavbarComponent implements OnInit {
 
   
-  constructor() {}
+  constructor(public authenticationService: AuthenticationService) {}
   
 
   ngOnInit(): void {

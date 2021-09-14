@@ -1,2 +1,117 @@
-<br><br><br>
-{{listing.title}}
+<h1 class="m-4 text-center title">{{listing.title}}</h1>
+
+<ngx-image-gallery 
+*ngIf="hasImage"
+[images]="images" 
+[conf]="conf"
+(onOpen)="galleryOpened($event)"
+(onClose)="galleryClosed()"
+(onImageClicked)="galleryImageClicked($event)"
+(onImageChange)="galleryImageChanged($event)"
+(onDelete)="deleteImage($event)"
+></ngx-image-gallery>
+
+<div class="container my-3">
+    <div class="price m-4 text-right">
+        {{(listing.price/100)| number: '1.2-2'}}kn
+    </div>
+    
+    <table class="table table-hover">
+        <thead>
+            <th scope="col" colspan="2" class="text-center border-top-0">Contact information</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">User</th>
+                <td>{{listing.userUsername}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Phone number</th>
+                <td>{{listing.userPhoneNumber}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="border p-3">
+        <span style="font-weight: bold;">Listing description:</span>
+        <br>
+        {{listing.description}}
+    </p>
+
+    <table class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                <th scope="row">Location</th>
+                <td>{{listing.placeName}}, {{listing.countyName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Condition</th>
+                <td>{{listing.condition}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Category</th>
+                <td>{{listing.category}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Published:</th>
+                <td>{{listing.timestampCreated | date:'medium'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="listing.category=='VEHICLE'" class="table table-hover">
+        <thead>
+            <th scope="col" colspan="2" class="text-center border-top-0">Vehicle information</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Make</th>
+                <td>{{listing.make}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Model</th>
+                <td>{{listing.model}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Year</th>
+                <td>{{listing.year}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Mileage</th>
+                <td>{{listing.mileage}} km</td>
+            </tr>
+            <tr>
+                <th scope="row">Horsepower</th>
+                <td>{{listing.horsepower}} hp</td>
+            </tr>
+        </tbody>
+    </table>
+    <table *ngIf="listing.category=='PROPERTY'" class="table table-hover">
+        <thead>
+            <th scope="col" colspan="2" class="text-center border-top-0">Property information</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Inside area</th>
+                <td>{{listing.insideArea}}m<sup>2</sup></td>
+            </tr>
+            <tr>
+                <th scope="row">Outside area</th>
+                <td>{{listing.outsideArea}}m<sup>2</sup></td>
+            </tr>
+            <tr>
+                <th scope="row">Year built</th>
+                <td>{{listing.yearBuilt}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Floors</th>
+                <td>{{listing.floors}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Number of rooms</th>
+                <td>{{listing.numberOfRooms}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

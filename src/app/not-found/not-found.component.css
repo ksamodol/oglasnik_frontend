@@ -1,0 +1,23 @@
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    white-space: nowrap;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+}
+.error{
+    text-align: center;
+}
+.vertical-center {
+    display: flex;
+    align-items: center;
+  }
+  .jumbotron {
+    position: absolute;
+    top: 54px;
+    bottom: 0;
+    width: 100%; 
+
+  }

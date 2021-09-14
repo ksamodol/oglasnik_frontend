@@ -1,17 +1,11 @@
 mat-grid-tile {
     background: lightblue;
 }
-.example-container{
-  top: 46px;
-}
-.example-sidenav{
-  position: fixed;
-  top: 46px;
-}
-mat-form-field{
-  width: 100%;
-}
 
+.sidenav{
+  position: fixed;
+  top: 54px;
+}
 .menu{
   display: block;
   position: relative;
@@ -19,12 +13,6 @@ mat-form-field{
   z-index: 100;
   padding: 10px;
   transition: all 0.3s linear;
-}
-form{
-  width: 600px; 
-  height:700px; 
-  padding: 10px;
-
 }
 .searchButton{
   margin-left: auto;

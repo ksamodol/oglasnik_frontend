@@ -1,0 +1,4 @@
+:host ::ng-deep mdb-navbar nav{
+    min-height: 54px !important;
+    z-index: 10000000;
+}

@@ -21,30 +21,32 @@
     <mat-card-footer style="text-align: right;">Date published: {{listing.timestampCreated | date:'dd/MM/yy'}}</mat-card-footer>
 </mat-card>
 -->
-<div class="listingCard" matRipple (click)="onListingClick(listing.id)">
-    <div class="listingHeader">
-        <div class="userInfo">
+<div class="listingCard container-xxl" matRipple (click)="onListingClick(listing.id)">
+    <div class="listingHeader row ">
+        <div class="userInfo col-auto col-md-auto">
             <img src="assets/user-small.png">
             <br>
             <span>{{listing.userUsername}}</span>
         </div>
-        <div class="title">
+        <div class="title col">
             <span>{{listing.title}}</span>
         </div>
-        <div class="location">
+        <div class="location col-md-auto col-12">
             <fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{listing.placeName}}, {{listing.countyName}}
         </div>
         
     </div>
-    <div class="listingContent">
-        <ul>
-            <li>Category: {{listing.category}}</li>
-            <li>Condition: {{listing.condition}}</li>
-            <li>Published: {{listing.timestampCreated | date:'dd/MM/yy'}} </li>
-        </ul>
-        <p>
-            {{listing.description}}
-        </p>
+    <div class="listingContent row">
+        <div class="col-12 col-md-4">
+            <ul>
+                <li>Category: <b>{{listing.category}}</b></li>
+                <li>Condition: <b>{{listing.condition}}</b></li>
+                <li>Published: <b>{{listing.timestampCreated | date:'dd/MM/yy'}}</b></li>
+            </ul>
+        </div>
+        <div *ngIf="hasImage" class="col-12 col-md-8">
+            <img [src]="imgSrc" class="image">
+        </div>
     </div>
     <div class="listingFooter">
         {{(listing.price/100)| number: '1.2-2'}}kn

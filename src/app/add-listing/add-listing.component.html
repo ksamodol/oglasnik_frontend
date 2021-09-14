@@ -1,72 +1,6 @@
-<!-- <form [formGroup]="addListingForm" class="md-form w-50 mx-auto" (ngSubmit)="submitForm()"> 
-
-    <p class="h4 mb-4 text-center">Add new listing</p>
-    <div class="md-form form-group">
-        <input mdbInput type="text" id="title" formControlName="title" placeholder="Title" class="form-control mb-4">
-        <mdb-error *ngIf="title.invalid && title.touched">Title must be between 3 and 20 characters!</mdb-error>
-    </div>
-    <div class="md-form form-group">
-        <input mdbInput type="text" id="description" formControlName="description" placeholder="Description" class="form-control mb-4">
-        <mdb-error *ngIf="description.invalid && description.touched">description error</mdb-error>
-    </div>
-    <div class="md-form form-group">
-        <input mdbInput type="number" id="price" formControlName="price" placeholder="Price" class="form-control mb-4">
-        <mdb-error *ngIf="price.invalid && price.touched">Title must be between 3 and 20 characters!</mdb-error>
-    </div>
-    <div class="md-form form-group">
-        <select class="browser-default custom-select mb-4" formControlName="conditionSelect">
-            <option *ngFor="let condition of conditions" [value]="condition">{{condition}}</option>
-        </select>
-    </div>
-    <div class="md-form form-group">
-        <select class="browser-default custom-select mb-4" formControlName="countySelect" (change)="onCountyChange($event.target.value)">
-            <option *ngFor="let county of counties" [value]="county.id">{{county.name}}</option>
-        </select>
-    </div>
-    <div class="md-form form-group">
-        <select class="browser-default custom-select mb-4" formControlName="placeSelect">
-            <option *ngFor="let place of places" [value]="place.id">{{place.name}}</option>
-        </select>
-    </div>
-    <div class="md-form form-group">
-        <select class="browser-default custom-select mb-4" formControlName="categorySelect">
-            <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-        </select>
-    </div>
-    <div *ngIf="categorySelect.value=='Vehicle'">
-        <div class="md-form form-group">
-            <input mdbInput type="number" id="vehicleYear" formControlName="vehicleYear" placeholder="Vehicle Year" class="form-control mb-4">
-            <mdb-error *ngIf="vehicleYear.invalid && vehicleYear.invalid">Title must be between 3 and 20 characters!</mdb-error>
-        </div>
-        <div class="md-form form-group">
-            <input mdbInput type="text" id="vehicleMake" formControlName="vehicleMake" placeholder="Vehicle Make" class="form-control mb-4">
-            <mdb-error *ngIf="vehicleMake.invalid && vehicleMake.touched">Title must be between 3 and 20 characters!</mdb-error>
-        </div>
-        <div class="md-form form-group">
-            <input mdbInput type="text" id="vehicleModel" formControlName="vehicleModel" placeholder="Vehicle Model" class="form-control mb-4">
-            <mdb-error *ngIf="vehicleModel.invalid && vehicleModel.touched">Title must be between 3 and 20 characters!</mdb-error>
-        </div>
-        <div class="md-form form-group">
-            <input mdbInput type="number" id="vehicleMileage" formControlName="vehicleMileage" placeholder="Vehicle mileage" class="form-control mb-4">
-            <mdb-error *ngIf="vehicleMileage.invalid && vehicleMileage.touched">Title must be between 3 and 20 characters!</mdb-error>
-        </div>
-        <div class="md-form form-group">
-            <input mdbInput type="number" id="vehicleHorsepower" formControlName="vehicleHorsepower" placeholder="vehicleHorsepower" class="form-control mb-4">
-            <mdb-error *ngIf="vehicleHorsepower.invalid && vehicleHorsepower.touched">Title must be between 3 and 20 characters!</mdb-error>
-        </div>
-    </div>
-    
-    <button mdbBtn color="primary" block="true" class="my-4" type="submit" [disabled]="addListingForm.invalid">Publish!</button>
-
-</form> -->
-
-
-
-
-
 <form [formGroup]="addListingForm" (ngSubmit)="submitForm()" style="width:800px" class="container">
 
-    <p class="h4 mb-4 text-center">Add new listing</p>
+    <p class="h4 m-4 text-center">Add new listing</p>
 
     <div class="row">
         <mat-form-field class="col-9">
@@ -188,6 +122,17 @@
             </mat-form-field>
         </div>
     </div>
+
+    <input
+        style="display: none"
+        type="file" 
+        accept=".jpg,.png"
+        multiple="true"
+        #fileInput
+        formControlName="images"
+        (change)="onFileSelect($event)">
+    <button (click)="fileInput.click()" type='button' mat-stroked-button >Select Files</button>
+    <div *ngIf="areImagesSelected"><p *ngFor="let name of imageNames">{{name}}</p></div>
 
     <div class="row justify-content-end">
         <button mat-raised-button color="primary" [disabled]="addListingForm.invalid" class="col-3">Publish!</button>
